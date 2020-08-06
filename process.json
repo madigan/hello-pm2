@@ -1,0 +1,16 @@
+{
+    "apps" : [{
+       "name" : "HTTP-API",
+       "script" : "http.js"
+    }],
+    "deploy" : {
+      "production" : {
+        "user" : "web",
+        "host" : ["work.thunk"],
+        "ref"  : "origin/master",
+        "repo" : "git@github.com:madigan/hello-pm2.git",
+        "path" : "/var/www/hello-pm2",
+        "post-deploy" : "npm install; node ."
+       }
+    }
+ }
