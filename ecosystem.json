@@ -1,0 +1,41 @@
+{
+  "apps" : [{
+    "name"      : "API",
+    "script"    : "index.js",
+    "env": {
+      "COMMON_VARIABLE": "true"
+    },
+    "env_production" : {
+      "NODE_ENV": "production"
+    }
+  }],
+  "deploy" : {
+    "production" : {
+      "user" : "web",
+      "host" : ["thunk.work"],
+      "ref"  : "origin/master",
+      "repo" : "git@github.com:madigan/hello-pm2.git",
+      "path" : "/home/web",
+      "ssh_options": "StrictHostKeyChecking=no",
+      "pre-setup" : "apt-get install git",
+      "post-setup": "ls -la",
+      "pre-deploy-local" : "echo 'This is a local executed command'",
+      "post-deploy" : "npm install && pm2 startOrRestart ecosystem.json --env production",
+      "env"  : {
+        "NODE_ENV": "production"
+      }
+    },
+    "staging" : {
+      "user" : "node",
+      "host" : "thunk.work",
+      "ref"  : "origin/master",
+      "repo" : "git@github.com:madigan/hello-pm2.git",
+      "path" : "/var/hello-pm2/",
+      "ssh_options": ["StrictHostKeyChecking=no", "PasswordAuthentication=no"],
+      "post-deploy" : "pm2 startOrRestart ecosystem.json --env dev",
+      "env"  : {
+        "NODE_ENV": "staging"
+      }
+    }
+  }
+}
