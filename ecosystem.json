@@ -14,9 +14,9 @@
       "repo" : "git@github.com:madigan/hello-pm2.git",
       "path" : "/home/web",
       "ssh_options": "StrictHostKeyChecking=no",
-      "pre-setup" : "apt-get install git",
+      "pre-setup" : "apt-get install git; mkdir /home/web/source",
       "post-setup": "ls -la",
-      "pre-deploy-local" : "mkdir ./source",
+      "pre-deploy-local" : "echo 'delpoying...'",
       "post-deploy" : "npm install && pm2 startOrRestart ecosystem.json --env production",
       "env"  : {
         "NODE_ENV": "production"
