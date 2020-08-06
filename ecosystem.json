@@ -2,9 +2,6 @@
   "apps" : [{
     "name"      : "API",
     "script"    : "index.js",
-    "env": {
-      "COMMON_VARIABLE": "true"
-    },
     "env_production" : {
       "NODE_ENV": "production"
     }
@@ -19,7 +16,7 @@
       "ssh_options": "StrictHostKeyChecking=no",
       "pre-setup" : "apt-get install git",
       "post-setup": "ls -la",
-      "pre-deploy-local" : "echo 'This is a local executed command'",
+      "pre-deploy-local" : "mkdir ./source",
       "post-deploy" : "npm install && pm2 startOrRestart ecosystem.json --env production",
       "env"  : {
         "NODE_ENV": "production"
